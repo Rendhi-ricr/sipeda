@@ -163,14 +163,49 @@ class Pdl extends BaseController
         }
     }
 
-    public function generateSurat($id_pdl)
+    public function generateSurat($id_pdl, $npm)
     {
-
-        // Mengambil data jenis pengajuan berdasarkan id_pdl
+        // Ambil data surat berdasarkan id_pdm
         $data['srt'] = $this->pdl->getJenisByPdl($id_pdl);
 
-        // Mengirim data ke view untuk di-render
-        return view('prodi/pdl/surat', $data);
+        // Path gambar kop surat
+        $path = FCPATH . 'uploads/kop_surat/kop.png';
+        $ttdAll = FCPATH . 'uploads/kop_surat/ttd_pdl.png';
+
+        // Konversi gambar ke Base64
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $dataImage = file_get_contents($path);
+        $TtdAll = file_get_contents($ttdAll);
+        $base64Image = 'data:image/' . $type . ';base64,' . base64_encode($dataImage);
+        $AllTtd = 'data:image/' . $type . ';base64,' . base64_encode($TtdAll);
+
+        // Kirimkan base64 ke view
+        $data['kop_surat_base64'] = $base64Image;
+        $data['ttdAll'] = $AllTtd;
+
+        // Load the view as a string
+        return view('prodi/pdl/pddsk/surat', $data);
+        // $html = view('prodi/pdl/pddsk/surat', $data);
+
+        // Generate PDF (misalnya dengan Dompdf)
+        $dompdf = new \Dompdf\Dompdf();
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        // // Buat nama file untuk surat PDF
+        // $pdfFileName = 'pdl_' . $npm . '_Surat_' . time() . '.pdf';
+
+        // // Simpan PDF ke folder
+        // file_put_contents(WRITEPATH . 'uploads/pdl/pddsk/' . $pdfFileName, $dompdf->output());
+
+        // // Simpan referensi surat PDF ke database
+        // $this->bpm->save([
+        //     'id_pdl' => $id_pdl,
+        //     'file' => $pdfFileName,
+        //     'jenis' => 'Surat'
+        // ]);
     }
 
     public function generateAndSaveSurat($id_pdl, $npm)

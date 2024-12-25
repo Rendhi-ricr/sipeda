@@ -52,9 +52,10 @@ $routes->group('prodi/pdl/pddsk', function ($routes) {
     $routes->post('update/(:num)', 'Prodi\Pdl\Pddsk::update/$1'); // Memperbarui data PDM
     $routes->get('delete/(:num)', 'Prodi\Pdl\Pddsk::delete/$1'); // Menghapus data PDM
     $routes->get('ajukan/(:num)', 'Prodi\Pdl\Pddsk::ajukan/$1'); // Mengajukan PDM untuk verifikasi
-    // $routes->get('lihatjp/(:num)', 'Prodi\Pdl::lihatjp/$1'); // Menampilkan jenis pengajuan
-    // $routes->post('jp/(:num)', 'Prodi\Pdl::jp/$1'); // Menyimpan jenis pengajuan
-    // $routes->get('generate-surat/(:num)', 'Prodi\Pdl::generateSurat/$1'); // Menghasilkan surat
+    // $routes->get('generate-surat/(:num)/(:alphanum)', 'Prodi\Pdl\Pddsk::generateSurat/$1/$2'); // Mengajukan PDM untuk verifikasi
+    $routes->get('lihatjp/(:num)', 'Prodi\Pdl::lihatjp/$1'); // Menampilkan jenis pengajuan
+    $routes->post('jp/(:num)', 'Prodi\Pdl::jp/$1'); // Menyimpan jenis pengajuan
+    $routes->get('generate-surat/(:num)', 'Prodi\Pdl::generateSurat/$1'); // Menghasilkan surat
 });
 
 $routes->group("puskom/pdm", function ($routes) {

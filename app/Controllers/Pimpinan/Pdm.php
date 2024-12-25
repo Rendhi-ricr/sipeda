@@ -6,14 +6,17 @@ use App\Controllers\BaseController;
 use App\Models\BerkasPdmModels;
 use App\Models\PdmModels;
 
-class Pdm extends BaseController {
+class Pdm extends BaseController
+{
     protected $pdmModel, $bpm;
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdmModel = new PdmModels();
         $this->bpm = new BerkasPdmModels();
     }
 
-    public function index() {
+    public function index()
+    {
         // Cek role pengguna dari session atau autentikasi
         $userRole = session()->get('level'); // Asumsikan role disimpan di sesi saat login
 
@@ -34,7 +37,8 @@ class Pdm extends BaseController {
         return view('pimpinan/pdm/index', $data);
     }
 
-    public function detail($id_pdm) {
+    public function detail($id_pdm)
+    {
         $pdm = $this->pdmModel->getPdmWithBerkas($id_pdm);
         $berkas = $this->bpm->getBerkasByPdm($id_pdm);
         $jenis = $this->pdmModel->getPdmWithBerkasAndJenis($id_pdm);
@@ -66,7 +70,8 @@ class Pdm extends BaseController {
         }
     }
 
-    public function acc_pimpinan($id_pdm) {
+    public function acc_pimpinan($id_pdm)
+    {
         $pdm = $this->pdmModel->data_pdm($id_pdm);
 
         if ($pdm && $pdm['status_pengajuan'] == 'Verifikasi Pimpinan') {
@@ -95,6 +100,7 @@ class Pdm extends BaseController {
                 'kop' => $base64Cap,
                 'ttd' => $base64Ttd,
                 'srt' => $this->pdmModel->getJenisByPdm($id_pdm),
+                'tanggal' => $this->pdmModel->BulanRomawi($id_pdm)
             ];
 
             $html = view('pimpinan/pdm/surat_jadi', $data);
@@ -123,7 +129,8 @@ class Pdm extends BaseController {
         return redirect()->to('/pimpinan/pdm');
     }
 
-    public function tolakPimpinan($id_pdm) {
+    public function tolakPimpinan($id_pdm)
+    {
         // Ambil data PDM berdasarkan ID
         $pdm = $this->pdmModel->data_pdm($id_pdm);
 

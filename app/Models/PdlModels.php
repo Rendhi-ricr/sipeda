@@ -8,7 +8,7 @@ class PdlModels extends Model
 {
     protected $table = 't_pdl';
     protected $primaryKey = 'id_pdl';
-    protected $allowedFields = ['npm', 'nama', 'prodi', 'terakhir_update', 'status_pengajuan', 'keterangan'];
+    protected $allowedFields = ['npm', 'nama', 'angkatan', 'prodi', 'terakhir_update', 'status_pengajuan', 'keterangan'];
 
     // public function getAll()
     // {

@@ -7,7 +7,7 @@ use App\Models\PdlModels;
 use App\Models\BerkasPdlModels;
 use App\Models\JenisPengajuanPdlModels;
 
-class Pddsk extends BaseController
+class Pddsk_backup extends BaseController
 {
     protected $pdl, $bpm, $jppm;
     public function __construct()
@@ -90,7 +90,7 @@ class Pddsk extends BaseController
             $validationRule = [
                 'npm' => 'required',
                 'nama' => 'required',
-                // 'file' => 'uploaded[file]|max_size[file,200]|ext_in[file,pdf]'
+                'file' => 'uploaded[file]|max_size[file,200]|ext_in[file,pdf]'
             ];
 
             // Validate input data
@@ -123,61 +123,37 @@ class Pddsk extends BaseController
                 ]);
 
                 // Simpan detail transaksi
-                $errorMessages = [];
                 if (!empty($pdf['file'])) { // Pastikan ada file yang diupload
                     $u = 0;
                     $jenis_berkas = '';
                     foreach ($pdf['file'] as $file) {
-                        if ($file->isValid() && !$file->hasMoved()) {
-                            // Validasi file satu per satu
-                            if ($file->getSize() > 200 * 1024) { // Ukuran maksimum 200KB
-                                $errorMessages[] = "File {$file->getName()} terlalu besar.";
-                                continue;
-                            }
+                        switch ($u) {
+                            case 0:
+                                $jenis_berkas = 'Ijazah dan Transkrip';
+                                break;
+                            case 1:
+                                $jenis_berkas = 'SK Yudisium';
+                                break;
+                        }
 
-                            if (!in_array($file->getClientExtension(), ['pdf'])) { // Validasi ekstensi file
-                                $errorMessages[] = "File {$file->getName()} harus berupa PDF.";
-                                continue;
-                            }
-
-                            // Tetapkan jenis berkas berdasarkan index
-                            switch ($u) {
-                                case 0:
-                                    $jenis_berkas = 'Ijazah dan Transkrip';
-                                    break;
-                                case 1:
-                                    $jenis_berkas = 'SK Yudisium';
-                                    break;
-                            }
-
-                            // Proses upload
+                        // Pastikan file diupload dan valid
+                        if ($file && $file->isValid() && !$file->hasMoved()) {
                             $newFileName = 'pdl_' . $npm . '' . $jenis_berkas . '' . time() . '.' . $file->getClientExtension(); // Buat nama file baru
                             $file->move(WRITEPATH . 'uploads/pdl/pddsk', $newFileName); // Pindahkan file ke folder
 
-                            // Simpan ke database
                             $this->bpm->save([
                                 'id_pdl' => $id_pdl,
                                 'file' => $newFileName, // Simpan nama file yang baru
                                 'jenis' => $jenis_berkas
                             ]);
-                        } elseif (!$file->isValid() && $file->getError() !== UPLOAD_ERR_NO_FILE) {
-                            // Tangani error jika file gagal diupload tetapi bukan karena tidak diisi
-                            $errorMessages[] = "Gagal mengunggah file {$file->getName()}.";
                         }
 
                         $u++;
                     }
-                }
-
-                // Jika ada error, tampilkan pesan error
-                if (!empty($errorMessages)) {
-                    session()->setFlashdata('error', implode('<br>', $errorMessages));
-                    return redirect()->to('/prodi/pdl/pddsk/tambah');
-                }
-                /* else {
+                } else {
                     session()->setFlashdata('error', 'Tidak ada file yang diupload.');
                     return redirect()->to('/prodi/pdl/pddsk/tambah');
-                } */
+                }
 
                 session()->setFlashdata('message', 'Data berhasil disimpan');
                 return redirect()->to('/prodi/pdl/pddsk');

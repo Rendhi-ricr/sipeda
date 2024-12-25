@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\PdlModels;
 use App\Models\BerkasPdlModels;
 
-class Pdm extends BaseController
+class Pdl extends BaseController
 {
     protected $pdl, $bpm;
     public function __construct()

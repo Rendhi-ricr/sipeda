@@ -42,46 +42,48 @@
                                 <?php
                                 $no = 1;
                                 foreach ($pdm as $key => $value) : ?>
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= esc($value->nama); ?></td>
-                                    <td><?= esc($value->npm); ?></td>
-                                    <td><?= esc($value->prodi); ?></td>
-                                    <td>
-                                        <?php if ($value->terakhir_update == '0000-00-00' || $value->terakhir_update == null): ?>
-                                        Belum di update
-                                        <?php else: ?>
-                                        <?= esc($value->terakhir_update); ?>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?= esc($value->status_pengajuan); ?></td>
-                                    <td><?= esc($value->jenis_pengajuan); ?></td>
-                                    <td><?= esc($value->keterangan); ?></td>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><?= esc($value->nama); ?></td>
+                                        <td><?= esc($value->npm); ?></td>
+                                        <td><?= esc($value->prodi); ?></td>
+                                        <td>
+                                            <?php if ($value->terakhir_update == '0000-00-00' || $value->terakhir_update == null): ?>
+                                                Belum di update
+                                            <?php else: ?>
+                                                <?= esc($value->terakhir_update); ?>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= esc($value->status_pengajuan); ?></td>
+                                        <td><?= esc($value->jenis_pengajuan); ?></td>
+                                        <td><?= esc($value->keterangan); ?></td>
 
-                                    <td>
-                                        <?php if ($value->status_pengajuan === 'Draft'): ?>
-                                        <a href="<?= base_url('prodi/pdm/edit/' . $value->id_pdm) ?>"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <?php if ($value->jenis_pengajuan !== null): ?>
-                                        <a href="<?= base_url('prodi/pdm/ajukan/' . $value->id_pdm) ?>"
-                                            class="btn btn-success btn-sm"
-                                            onclick="return confirm('Apakah anda yakin ingin mengajukan data ini?')">Ajukan</a>
-                                        <?php endif;?>
-                                        <a href="<?= base_url('prodi/pdm/delete/' . $value->id_pdm) ?>"
-                                            class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Apakah anda yakin akan menghapus data ini?')">Hapus</a>
-                                        <a href="<?= base_url('prodi/pdm/lihatjp/' . $value->id_pdm) ?>"
-                                            class="btn btn-info btn-sm">Jenis Pengajuan</a>
-                                        <?php elseif ($value->status_pengajuan === 'Ditolak'): ?>
-                                        <a href="<?= base_url('prodi/pdm/delete/' . $value->id_pdm) ?>"
-                                            class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Apakah anda yakin akan menghapus data ini?')">Hapus</a>
-                                        <?php endif; ?>
+                                        <td>
+                                            <?php if ($value->status_pengajuan === 'Draft'): ?>
+                                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                    <a href="<?= base_url('prodi/pdm/edit/' . $value->id_pdm) ?>"
+                                                        class="btn btn-warning btn-sm rounded">Edit</a>
+                                                    <?php if ($value->jenis_pengajuan !== null): ?>
+                                                        <a href="<?= base_url('prodi/pdm/ajukan/' . $value->id_pdm) ?>"
+                                                            class="btn btn-success btn-sm rounded"
+                                                            onclick="return confirm('Apakah anda yakin ingin mengajukan data ini?')">Ajukan</a>
+                                                    <?php endif; ?>
+                                                    <a href="<?= base_url('prodi/pdm/delete/' . $value->id_pdm) ?>"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Apakah anda yakin akan menghapus data ini?')">Hapus</a>
+                                                    <a href="<?= base_url('prodi/pdm/lihatjp/' . $value->id_pdm) ?>"
+                                                        class="btn btn-info btn-sm rounded">Jenis Pengajuan</a>
+                                                </div>
+                                            <?php elseif ($value->status_pengajuan === 'Ditolak'): ?>
+                                                <a href="<?= base_url('prodi/pdm/delete/' . $value->id_pdm) ?>"
+                                                    class="btn btn-danger btn-sm rounded"
+                                                    onclick="return confirm('Apakah anda yakin akan menghapus data ini?')">Hapus</a>
+                                            <?php endif; ?>
 
-                                        <a href="<?= base_url('prodi/pdm/detail/' . $value->id_pdm) ?>"
-                                            class="btn btn-primary btn-sm">Lihat Berkas</a>
-                                    </td>
-                                </tr>
+                                            <a href="<?= base_url('prodi/pdm/detail/' . $value->id_pdm) ?>"
+                                                class="btn btn-primary btn-sm rounded">Lihat Berkas</a>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

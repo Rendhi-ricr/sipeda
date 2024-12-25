@@ -83,16 +83,36 @@ class PdmModels extends Model
     public function getJenisByPdm($id_pdm)
     {
         return $this->db->table('t_jenis_pengajuan_pdm')
-            ->select('t_jenis_pengajuan_pdm.jenis_pengajuan, t_jenis_pengajuan_pdm.data_awal, t_jenis_pengajuan_pdm.data_diusulkan, t_pdm.nama, t_pdm.npm')
+            ->select("
+            GROUP_CONCAT(t_jenis_pengajuan_pdm.jenis_pengajuan ORDER BY t_jenis_pengajuan_pdm.id_jenis_pengajuan_pdm SEPARATOR ' / ') AS jenis_pengajuan,
+            GROUP_CONCAT(t_jenis_pengajuan_pdm.data_awal ORDER BY t_jenis_pengajuan_pdm.id_jenis_pengajuan_pdm SEPARATOR ' / ') AS data_awal,
+            GROUP_CONCAT(t_jenis_pengajuan_pdm.data_diusulkan ORDER BY t_jenis_pengajuan_pdm.id_jenis_pengajuan_pdm SEPARATOR ' / ') AS data_diusulkan,
+            t_pdm.nama, t_pdm.npm, t_pdm.terakhir_update")
             ->join('t_pdm', 't_pdm.id_pdm = t_jenis_pengajuan_pdm.id_pdm')
             ->where('t_jenis_pengajuan_pdm.id_pdm', $id_pdm)
             ->get()
             ->getResult();
+
+
         // return $this->db->table('t_jenis_pengajuan_pdm')
         //     ->select('t_jenis_pengajuan_pdm.*', 't_pdm.*')
         //     ->join('t_pdm', 't_pdm.id_pdm = t_jenis_pengajuan_pdm.id_pdm')
         //     ->where('t_jenis_pengajuan_pdm.id_pdm', $id_pdm)
         //     ->get()
         //     ->getResult();
+    }
+
+    public function BulanRomawi($id_pdm)
+    {
+        return $this->db->table('t_jenis_pengajuan_pdm')
+            ->select("
+            GROUP_CONCAT(t_jenis_pengajuan_pdm.jenis_pengajuan ORDER BY t_jenis_pengajuan_pdm.id_jenis_pengajuan_pdm SEPARATOR ' / ') AS jenis_pengajuan,
+            GROUP_CONCAT(t_jenis_pengajuan_pdm.data_awal ORDER BY t_jenis_pengajuan_pdm.id_jenis_pengajuan_pdm SEPARATOR ' / ') AS data_awal,
+            GROUP_CONCAT(t_jenis_pengajuan_pdm.data_diusulkan ORDER BY t_jenis_pengajuan_pdm.id_jenis_pengajuan_pdm SEPARATOR ' / ') AS data_diusulkan,
+            t_pdm.nama, t_pdm.npm, t_pdm.terakhir_update")
+            ->join('t_pdm', 't_pdm.id_pdm = t_jenis_pengajuan_pdm.id_pdm')
+            ->where('t_jenis_pengajuan_pdm.id_pdm', $id_pdm)
+            ->get()
+            ->getRow();
     }
 }

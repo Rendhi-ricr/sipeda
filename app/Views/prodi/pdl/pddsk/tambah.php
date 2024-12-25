@@ -31,6 +31,12 @@
                         <input type="text" name="nama" id="nama" class="form-control" required />
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="form-label" for="angkatan">Angkatan</label>
+                        <input type="number" name="angkatan" id="angkatan" class="form-control" required />
+                    </div>
+                </div>
 
                 <div class="row mb-3">
                     <div class="col-md-12">
@@ -79,156 +85,17 @@
                 </div> -->
 
                 <div class="row mb-3">
-                    <!-- <div class="col-md-6">
-                        <label class="form-label" for="file_kk">Kartu Keluarga</label>
-                        <small class="text-muted "> | Maximum Upload : <h7 style="color:red;">200 kb</h7></small>
-                        <input type="file" name="file[]" class="form-control" required>
-                    </div> -->
                     <div class="col-md-6">
                         <label class="form-label" for="file_ijazah">Ijazah dan Transkrip</label>
                         <small class="text-muted "> | Maximum Upload : <h7 style="color:red;">200 kb</h7></small>
                         <input type="file" name="file[]" class="form-control" required>
                     </div>
+                    <div class="col-md-6 d-none" id="dokumenInput">
+                        <label class="form-label" for="file_sk">Sk Yudisium</label>
+                        <small class="text-muted"> | Maximum Upload: <span style="color:red;">200 kb</span></small>
+                        <input type="file" name="file[]" class="form-control" id="file_dokumen">
+                    </div>
                 </div>
-
-                <!-- <div class="row mb-3"> -->
-                <!-- <div class="col-md-6">
-                        <label class="form-label" for="file_transkrip">Transkrip</label>
-                        <small class="text-muted "> | Maximum Upload : <h7 style="color:red;">200 kb</h7></small>
-                        <input type="file" name="file[]" class="form-control" required>
-                    </div> -->
-                <!-- <div class="col-md-6">
-                    <label class="form-label" for="file_ktm">KTM</label>
-                    <small class="text-muted "> | Maximum Upload : <h7 style="color:red;">200 kb</h7></small>
-                    <input type="file" name="file[]" class="form-control" required>
-                </div>
-            </div> -->
-
-                <!-- <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="Nama" id="nama">
-                            <label class="form-label" for="nama">Nama</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="NIK" id="nik">
-                            <label class="form-label" for="nik">NIK</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="Jenis Kelamin" id="jenis_kelamin">
-                            <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="Tanggal Lahir" id="tanggal_lahir">
-                            <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="Tempat Lahir" id="tempat_lahir">
-                            <label class="form-label" for="tempat_lahir">Tempat Lahir</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="Nama Ibu" id="nama_ibu">
-                            <label class="form-label" for="nama_ibu">Nama Ibu</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="jenis_pengajuan[]" value="NPM" id="npm">
-                            <label class="form-label" for="npm">NPM</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label>Data Awal</label>
-                                    <input type="text" name="data_awal[]" class="form-control mt-2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Data Diusulkan</label>
-                                    <input type="text" name="data_diusulkan[]" class="form-control mt-2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Akhir Bagian Input File -->
-
                 <div class="card-footer text-end">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -249,5 +116,18 @@
             }
         });
     });
+
+    document.getElementById('jenis_pengajuan').addEventListener('change', function() {
+        const dokumenInput = document.getElementById('dokumenInput');
+        const selectedValue = this.value;
+
+        // Tampilkan dokumenInput jika jenis pengajuan adalah "No Ijazah Atau No Sertifikat Profesi"
+        if (selectedValue === 'No Ijazah Atau No Sertifikat Profesi') {
+            dokumenInput.classList.remove('d-none');
+        } else {
+            dokumenInput.classList.add('d-none');
+        }
+    });
 </script>
+
 <?= $this->endSection() ?>

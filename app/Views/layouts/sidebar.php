@@ -21,11 +21,11 @@
                         <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">PDM</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a class="sidebar-link" href="/prodi/pdl">
                         <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">PDL</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="sidebar-item">
                     <a data-bs-target="#multi" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-right-down align-middle">

@@ -7,15 +7,18 @@ use App\Models\BerkasPdmModels;
 use App\Models\JenisPengajuanPdmModels;
 use App\Models\PdmModels;
 
-class Pdm extends BaseController {
+class Pdm extends BaseController
+{
     protected $pdmModel, $bpm, $jppm;
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdmModel = new PdmModels();
         $this->bpm = new BerkasPdmModels();
         $this->jppm = new JenisPengajuanPdmModels();
     }
 
-    public function index() {
+    public function index()
+    {
         // Ambil prodi dari sesi pengguna yang login
         $prodi = session()->get('prodi'); // Pastikan prodi disimpan saat login
 
@@ -28,7 +31,8 @@ class Pdm extends BaseController {
         return view('prodi/pdm/index', $data);
     }
 
-    public function detail($id_pdm) {
+    public function detail($id_pdm)
+    {
         $pdm = $this->pdmModel->getPdmWithBerkas($id_pdm);
         $berkas = $this->bpm->getBerkasByPdm($id_pdm);
         $jenis = $this->pdmModel->getPdmWithBerkasAndJenis($id_pdm);
@@ -60,7 +64,8 @@ class Pdm extends BaseController {
         }
     }
 
-    public function tambah() {
+    public function tambah()
+    {
         // Ambil prodi dari sesi
         $prodi = session()->get('prodi'); // Pastikan prodi sudah disimpan saat login
 
@@ -72,7 +77,8 @@ class Pdm extends BaseController {
         return view('prodi/pdm/tambah', $data);
     }
 
-    public function simpan() {
+    public function simpan()
+    {
         date_default_timezone_set('Asia/Jakarta'); // Ganti dengan zona waktu yang sesuai
         if ($this->request->getMethod() === 'post') {
             // Aturan validasi
@@ -109,21 +115,21 @@ class Pdm extends BaseController {
                     $jenis_berkas = '';
                     foreach ($pdf['file'] as $file) {
                         switch ($u) {
-                        case 0:
-                            $jenis_berkas = 'KTP';
-                            break;
-                        case 1:
-                            $jenis_berkas = 'AKTA';
-                            break;
-                        case 2:
-                            $jenis_berkas = 'KK';
-                            break;
-                        case 3:
-                            $jenis_berkas = 'Ijazah dan Transkrip';
-                            break;
-                        case 4:
-                            $jenis_berkas = 'KTM';
-                            break;
+                            case 0:
+                                $jenis_berkas = 'KTP';
+                                break;
+                            case 1:
+                                $jenis_berkas = 'AKTA';
+                                break;
+                            case 2:
+                                $jenis_berkas = 'KK';
+                                break;
+                            case 3:
+                                $jenis_berkas = 'Ijazah dan Transkrip';
+                                break;
+                            case 4:
+                                $jenis_berkas = 'KTM';
+                                break;
                         }
 
                         // Pastikan file diupload dan valid
@@ -158,7 +164,8 @@ class Pdm extends BaseController {
         }
     }
 
-    public function generateAndSaveSurat($id_pdm, $npm) {
+    public function generateAndSaveSurat($id_pdm, $npm)
+    {
         // Ambil data surat berdasarkan id_pdm
         $data['srt'] = $this->pdmModel->getJenisByPdm($id_pdm);
 
@@ -172,6 +179,7 @@ class Pdm extends BaseController {
 
         // Kirimkan base64 ke view
         $data['kop_surat_base64'] = $base64Image;
+        $data['tanggal'] = $this->pdmModel->BulanRomawi($id_pdm);
 
         // Load the view as a string
         $html = view('prodi/pdm/surat', $data);
@@ -195,10 +203,10 @@ class Pdm extends BaseController {
             'file' => $pdfFileName,
             'jenis' => 'Surat',
         ]);
-
     }
 
-    public function edit($id_pdm) {
+    public function edit($id_pdm)
+    {
         // Ambil data PDM berdasarkan ID
         $data['pdm'] = $this->pdmModel->data_pdm($id_pdm);
 
@@ -214,7 +222,8 @@ class Pdm extends BaseController {
         return view('prodi/pdm/edit', $data);
     }
 
-    public function update($id_pdm) {
+    public function update($id_pdm)
+    {
         // Cek jika metode yang dipakai adalah POST
         if ($this->request->getMethod() === 'post') {
             // Aturan validasi
@@ -249,24 +258,24 @@ class Pdm extends BaseController {
                     $jenis_berkas = '';
                     foreach ($files['file'] as $file) {
                         switch ($u) {
-                        case 0:
-                            $jenis_berkas = 'KTP';
-                            break;
-                        case 1:
-                            $jenis_berkas = 'AKTA';
-                            break;
-                        case 2:
-                            $jenis_berkas = 'KK';
-                            break;
-                        case 3:
-                            $jenis_berkas = 'Ijazah';
-                            break;
-                        case 4:
-                            $jenis_berkas = 'Transkrip';
-                            break;
-                        case 5:
-                            $jenis_berkas = 'KTM';
-                            break;
+                            case 0:
+                                $jenis_berkas = 'KTP';
+                                break;
+                            case 1:
+                                $jenis_berkas = 'AKTA';
+                                break;
+                            case 2:
+                                $jenis_berkas = 'KK';
+                                break;
+                            case 3:
+                                $jenis_berkas = 'Ijazah';
+                                break;
+                            case 4:
+                                $jenis_berkas = 'Transkrip';
+                                break;
+                            case 5:
+                                $jenis_berkas = 'KTM';
+                                break;
                         }
 
                         // Pastikan file diupload dan valid
@@ -315,7 +324,8 @@ class Pdm extends BaseController {
         }
     }
 
-    public function delete($id_pdm) {
+    public function delete($id_pdm)
+    {
         // Cek apakah data pdm dengan id tersebut ada
         $pdmData = $this->pdmModel->find($id_pdm);
 
@@ -350,7 +360,8 @@ class Pdm extends BaseController {
         }
     }
 
-    public function ajukan($id_pdm) {
+    public function ajukan($id_pdm)
+    {
         // Ambil data PDM berdasarkan ID
         $pdm = $this->pdmModel->data_pdm($id_pdm);
 
@@ -377,13 +388,15 @@ class Pdm extends BaseController {
         return redirect()->to('/prodi/pdm');
     }
 
-    public function lihatjp($id_pdm) {
+    public function lihatjp($id_pdm)
+    {
         $data['id_pdm'] = $id_pdm;
         $data['jppm'] = $this->jppm->where('id_pdm', $id_pdm)->findAll();
         return view('prodi/pdm/lihatjp', $data);
     }
 
-    public function jp($id_pdm) {
+    public function jp($id_pdm)
+    {
         $this->jppm->save([
             'id_pdm' => $id_pdm,
             'jenis_pengajuan' => $this->request->getPost('jenis_pengajuan'),
@@ -393,14 +406,13 @@ class Pdm extends BaseController {
         return redirect()->to('prodi/pdm/lihatjp/' . $id_pdm);
     }
 
-    public function generateSurat($id_pdm) {
+    public function generateSurat($id_pdm)
+    {
 
         // Mengambil data jenis pengajuan berdasarkan id_pdm
-        $data['srt'] = $this->pdmModel->getJenisByPdm($id_pdm);
 
-        // Ambil data surat berdasarkan id_pdm
         $data['srt'] = $this->pdmModel->getJenisByPdm($id_pdm);
-
+        $data['tanggal'] = $this->pdmModel->BulanRomawi($id_pdm);
         // Path gambar kop surat
         $path = FCPATH . 'uploads/kop_surat/kop.png';
 
@@ -418,7 +430,8 @@ class Pdm extends BaseController {
         return view('prodi/pdm/surat', $data);
     }
 
-    private function handleFileUpload($file) {
+    private function handleFileUpload($file)
+    {
         if ($this->isFileSafe($file->getTempName())) {
             $newFileName = 'pdm_' . time() . '.' . $file->getClientExtension();
             $file->move(WRITEPATH . 'uploads/pdm', $newFileName);
@@ -427,7 +440,8 @@ class Pdm extends BaseController {
         return ['error' => true, 'message' => 'File mengandung kode berbahaya dan tidak dapat diunggah.'];
     }
 
-    private function isFileSafe($filePath) {
+    private function isFileSafe($filePath)
+    {
         $fileContent = file_get_contents($filePath);
         if (preg_match('/<\?php|<script|<\?=/i', $fileContent)) {
             return false;

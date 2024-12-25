@@ -29,6 +29,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>NPM</th>
+                                    <th>NPM</th>
                                     <th>Prodi</th>
                                     <th>Terakhir Di Update</th>
                                     <th>Status pengajuan</th>
@@ -46,6 +47,7 @@
                                             <td><?= $no++; ?></td>
                                             <td><?= esc($value->nama); ?></td>
                                             <td><?= esc($value->npm); ?></td>
+                                            <td><?= esc($value->angkatan); ?></td>
                                             <td><?= esc($value->prodi); ?></td>
                                             <td>
                                                 <?php if ($value->terakhir_update == '0000-00-00' || $value->terakhir_update == null): ?>
