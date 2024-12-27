@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 26, 2024 at 01:48 PM
+-- Generation Time: Dec 25, 2024 at 08:39 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -46,6 +46,17 @@ CREATE TABLE `t_berkas_pdm` (
   `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `jenis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `t_berkas_pdm`
+--
+
+INSERT INTO `t_berkas_pdm` (`id_berkas_pdm`, `id_pdm`, `file`, `jenis`) VALUES
+(1, 1, 'pdm_uyagvdabhKTP1735108538.pdf', 'KTP'),
+(2, 1, 'pdm_uyagvdabhAKTA1735108538.pdf', 'AKTA'),
+(3, 1, 'pdm_uyagvdabhKK1735108538.pdf', 'KK'),
+(4, 1, 'pdm_uyagvdabhIjazah dan Transkrip1735108538.pdf', 'Ijazah dan Transkrip'),
+(5, 1, 'pdm_uyagvdabhKTM1735108538.pdf', 'KTM');
 
 -- --------------------------------------------------------
 
@@ -108,6 +119,13 @@ CREATE TABLE `t_pdm` (
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `t_pdm`
+--
+
+INSERT INTO `t_pdm` (`id_pdm`, `npm`, `nama`, `prodi`, `terakhir_update`, `status_pengajuan`, `keterangan`) VALUES
+(1, 'uyagvdabh', 'igsuavjbkdas', 'Administrasi Publik', '0000-00-00', 'Draft', '');
+
 -- --------------------------------------------------------
 
 --
@@ -116,11 +134,11 @@ CREATE TABLE `t_pdm` (
 
 CREATE TABLE `t_user` (
   `id_user` int NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `prodi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `password` varchar(200) NOT NULL,
-  `level` enum('admin','puskom','prodi','pimpinan') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `prodi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `level` enum('admin','puskom','prodi','pimpinan') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `t_user`
@@ -193,7 +211,7 @@ ALTER TABLE `t_berkas_pdl`
 -- AUTO_INCREMENT for table `t_berkas_pdm`
 --
 ALTER TABLE `t_berkas_pdm`
-  MODIFY `id_berkas_pdm` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_berkas_pdm` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `t_jenis_pengajuan_pdl`
@@ -217,7 +235,7 @@ ALTER TABLE `t_pdl`
 -- AUTO_INCREMENT for table `t_pdm`
 --
 ALTER TABLE `t_pdm`
-  MODIFY `id_pdm` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pdm` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t_user`
