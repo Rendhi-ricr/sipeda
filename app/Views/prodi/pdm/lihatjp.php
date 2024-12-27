@@ -2,7 +2,14 @@
 <?= $this->section('title') ?>Lihat Jenis Pengajuan<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid p-0">
-    <a href="<?= base_url('/prodi/pdm'); ?>" class="btn btn-secondary btn-sm my-4"><i class="bx bx-right-arrow-alt"></i> Kembali</a>
+    <div class="">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="h3 d-inline align-middle">Jenis Pengajuan</h1>
+            </div>
+        </div>
+    </div>
+    <a href="<?= base_url('/prodi/pdm'); ?>" class="btn btn-secondary my-4 rounded"><i class="bx bx-right-arrow-alt"></i> Kembali</a>
 
     <form id="editor-form" action="<?= site_url('prodi/pdm/jp/' . $id_pdm) ?>" method="post" enctype="multipart/form-data">
         <div class="row mb-3">
@@ -34,7 +41,7 @@
         </div>
 
         <div class="card-footer text-end">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
         </div>
     </form>
 

@@ -5,9 +5,9 @@
         </a>
 
         <ul class="sidebar-nav">
-            <li class="sidebar-header">
+            <!-- <li class="sidebar-header">
                 Tools & Components
-            </li>
+            </li> -->
             <li class="sidebar-item">
                 <a class="sidebar-link" href="/">
                     <i class="align-middle" data-feather="square"></i> <span class="align-middle">Dashboard</span>

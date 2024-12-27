@@ -29,7 +29,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>NPM</th>
-                                    <th>NPM</th>
+                                    <th>Angkatan</th>
                                     <th>Prodi</th>
                                     <th>Terakhir Di Update</th>
                                     <th>Status pengajuan</th>
